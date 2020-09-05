@@ -12,6 +12,12 @@ token ="1327620351:AAFuPqqT81BgTp0vaw7dzP1UvgENEUltJHo"
 bot = telebot.TeleBot(token)
 global flag
 flag = False
+data = {
+    'chat.id':0,
+    'Type_clinic':'Type',
+    'FIO_doctor':'FIO',
+    
+}
 #подключаем 2 входные кнопки
 @bot.message_handler(commands=['start'])
 def start_message(message):
@@ -128,13 +134,13 @@ def proverka(message):
 
 def createButtons(Name,message,callback):
     key = types.InlineKeyboardMarkup()
-    counts = Name.split().len() - 1
+    counts = len(Name.split())
     names = Name.split()
     call = callback.split()
     i = 0
     while True:
             if i == counts:
-                bot.send_message(message.chat.id,":hospital:Выбери кнопку:hospital:",reply_markup=key)
+                bot.send_message(message.chat.id,"Выбери кнопку",reply_markup=key)
                 break
             but = types.InlineKeyboardButton(text=names[i],callback_data=call[i])
             key.add(but)

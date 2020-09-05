@@ -83,11 +83,7 @@ def inlin(d):
         bot.send_message(d.message.chat.id, "Вы выбрали тип - частная больница", reply_markup=key)
     if d.data == 'Запись к врачу':
         bot.delete_message(d.message.chat.id, d.message.message_id)
-        key = types.InlineKeyboardMarkup()
-        but_6 = types.InlineKeyboardButton(text = "Терапевт", callback_data = "Терапевт")
-        but_7 = types.InlineKeyboardButton(text="Психолог", callback_data = "Психолог") 
-        key.add(but_6, but_7)
-        bot.send_message(d.message.chat.id, "Вы выбрали запись ко врачу", reply_markup=key)
+        createButtons("Психолог Педиатр",d,"Психолог Педиатр")
 ##кнопки, сменяющие запись к врачу
 #@bot.callback_query_handler(func=lambda c:True)
 #def inline(s):
@@ -129,6 +125,20 @@ def proverka(message):
 
             break
         i += 1
+
+def createButtons(Name,message,callback):
+    key = types.InlineKeyboardMarkup()
+    counts = Name.split().len() - 1
+    names = Name.split()
+    call = callback.split()
+    i = 0
+    while True:
+            if i == counts:
+                bot.send_message(message.chat.id,":hospital:Выбери кнопку:hospital:",reply_markup=key)
+                break
+            but = types.InlineKeyboardButton(text=names[i],callback_data=call[i])
+            key.add(but)
+            
 
 
 bot.polling(timeout=5,interval=0)
